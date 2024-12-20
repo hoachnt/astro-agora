@@ -1,0 +1,62 @@
+---
+export const prerender = false;
+
+import pkg from "agora-token"; // Import the entire module as `pkg`
+import type { AstroGlobal } from "astro";
+import Layout from "../../../layouts/Layout.astro";
+import CallRoom from "../../../components/CallRoom.svelte";
+
+// Extract the necessary exports from `pkg`
+const { RtcRole, RtcTokenBuilder } = pkg;
+
+// Get environment variables
+const PUBLIC_APP_ID = import.meta.env.PUBLIC_APP_ID;
+const APP_CERTIFICATE = import.meta.env.APP_CERTIFICATE;
+
+// Get parameters from the URL
+const { params, url }: AstroGlobal = Astro;
+const channel = params.channel;
+let uid: string | number = url.searchParams.get("uid") || "0";
+
+// Validate channel and uid
+if (!channel) {
+	return new Response(JSON.stringify({ error: "channel is required" }), {
+		status: 400,
+		headers: { "Content-Type": "application/json" },
+	});
+}
+
+uid = parseInt(uid as string, 10);
+if (isNaN(uid)) {
+	return new Response(
+		JSON.stringify({ error: "uid should be a valid number" }),
+		{ status: 400, headers: { "Content-Type": "application/json" } }
+	);
+}
+
+// Generate token
+let token = "";
+try {
+	token = RtcTokenBuilder.buildTokenWithUid(
+		PUBLIC_APP_ID,
+		APP_CERTIFICATE,
+		channel,
+		uid,
+		RtcRole.PUBLISHER,
+		600, // Token expiration time in seconds
+		600
+	);
+
+	console.log(token);
+} catch (e: any) {
+	console.error("Error generating token:", e);
+	return new Response(
+		JSON.stringify({
+			error: `json expected: ${JSON.stringify(e.message || e)}`,
+		}),
+		{ status: 400, headers: { "Content-Type": "application/json" } }
+	);
+}
+---
+
+<Layout> <CallRoom {channel} {uid} {token} client:only="svelte" /></Layout>
