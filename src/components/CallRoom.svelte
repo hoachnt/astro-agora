@@ -17,11 +17,10 @@
 	});
 </script>
 
-<h1>Astro x Agora</h1>
-
 {#if inCall}
 	<div style="text-align: center">
 		<button
+			class="btn btn-error"
 			on:click={() => {
 				inCall = false;
 			}}>End Call</button
@@ -30,8 +29,10 @@
 	<br />
 	<svelte:component this={VideoCall} {channel} {uid} {token} />
 {:else}
-	<div style="text-align: center">
-		<button on:click={() => (inCall = true)}>Rejoin</button>
-		<a href="/"><button>Back</button></a>
+	<div class="join flex justify-center">
+		<button class="btn join-item" on:click={() => (inCall = true)}
+			>Rejoin</button
+		>
+		<a href="/"><button class="btn join-item btn-error">Back</button></a>
 	</div>
 {/if}

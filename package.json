@@ -19,6 +19,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "agora-token": "^2.0.3"
+    "agora-token": "^2.0.3",
+    "daisyui": "^4.12.22"
   }
 }

@@ -88,17 +88,14 @@
 				<p class="uid">{user.uid}</p>
 			</div>
 		{/each}
-		<div class="cell">
-			<div class="video" id="me"></div>
+		<div class="cell relative">
+			<div class="video w-full h-full" id="me"></div>
 			<p class="uid">me</p>
 		</div>
 	</div>
 </div>
 
 <style>
-	.cell {
-		position: relative;
-	}
 	.uid {
 		position: absolute;
 		padding-left: 10px;
@@ -108,19 +105,16 @@
 		right: 0;
 		background-color: white;
 	}
-	.video {
-		width: 100%;
-		height: 100%;
-	}
+
 	.container {
 		border-radius: 5px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		flex: 1;
-		width: 95vw;
+		width: 100%;
 		margin: auto;
-		height: 80vh;
+		height: 85dvh;
 	}
 	.grid {
 		display: grid;
