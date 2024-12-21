@@ -17,7 +17,7 @@
 	});
 </script>
 
-<h1>SvelteKit x Agora</h1>
+<h1>Astro x Agora</h1>
 
 {#if inCall}
 	<div style="text-align: center">
