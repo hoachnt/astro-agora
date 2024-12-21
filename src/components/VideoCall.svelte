@@ -79,10 +79,10 @@
 <div class="container">
 	<div class="grid" style="grid-template-columns: {columnTemplate}">
 		{#each users as user (user.uid)}
-			<div class="cell">
+			<div class="cell relative">
 				<div
 					use:renderVideo={user}
-					class="video"
+					class="video w-full h-full"
 					id={String(user.uid)}
 				></div>
 				<p class="uid">{user.uid}</p>
