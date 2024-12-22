@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte";
 	/** Пропсы передаются из родителя */
 	export let channel;
@@ -8,7 +8,7 @@
 	/**
 	 * Динамический импорт VideoCall.svelte
 	 */
-	let VideoCall;
+	let VideoCall: __sveltets_2_IsomorphicComponent<{ channel: string; uid: number; token: string; }, { [evt: string]: CustomEvent<any>; }, {}, {}, string>;
 	let inCall = true;
 
 	onMount(async () => {
