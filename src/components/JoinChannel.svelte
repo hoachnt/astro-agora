@@ -22,8 +22,10 @@
 			UID:
 			<input bind:value={uid} name="uid" type="number" class="grow" />
 		</label>
-		<div class="flex justify-end">
-			<button class="btn" on:click={handleClick}>Join Channel</button>
+		<div class="">
+			<button class="btn btn-block" on:click={handleClick}
+				>Join Channel</button
+			>
 		</div>
 	</div>
 </div>

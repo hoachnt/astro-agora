@@ -5,12 +5,11 @@
 		type ILocalAudioTrack,
 	} from "agora-rtc-sdk-ng";
 	import { onDestroy } from "svelte";
+	import { fade, scale } from "svelte/transition";
 
 	export let channel: string;
 	export let uid: number;
 	export let token: string;
-
-	console.log(channel, uid, token);
 
 	let users: IAgoraRTCRemoteUser[] = [];
 	let video: null | ILocalVideoTrack = null;
@@ -79,7 +78,11 @@
 <div class="container">
 	<div class="grid" style="grid-template-columns: {columnTemplate}">
 		{#each users as user (user.uid)}
-			<div class="cell relative">
+			<div
+				class="cell relative"
+				in:fade={{ duration: 400 }}
+				out:fade={{ duration: 400 }}
+			>
 				<div
 					use:renderVideo={user}
 					class="video w-full h-full"
@@ -88,7 +91,11 @@
 				<p class="uid">{user.uid}</p>
 			</div>
 		{/each}
-		<div class="cell relative">
+		<div
+			class="cell relative"
+			in:scale={{ duration: 400 }}
+			out:scale={{ duration: 400 }}
+		>
 			<div class="video w-full h-full" id="me"></div>
 			<p class="uid">me</p>
 		</div>
@@ -116,9 +123,18 @@
 		margin: auto;
 		height: 85dvh;
 	}
+
 	.grid {
 		display: grid;
 		width: 100%;
 		height: 100%;
+		gap: 8px;
+	}
+
+	.cell {
+		position: relative;
+		overflow: hidden;
+		border-radius: 30px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	}
 </style>
